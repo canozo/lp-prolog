@@ -1,4 +1,4 @@
-# Base de estudiantes
+% Base de estudiantes
 estudiante(2000100001,1,[math101, phys201, ec201]) .
 estudiante(2000100002,1,[math101, phys201, hist301]).
 estudiante(2000100003,1,[math101, ec201, hist301]) .
@@ -66,7 +66,7 @@ estudiante(2000104311,0,[cmpe150, hist301]).
 estudiante(2000105412,1,[math101, phys201]).
 estudiante(2002196509,0,[math101, hist301]).
 
-# Base de aulas
+% Base de aulas
 aula(nh101, 50, 10).
 aula(nh201, 50, 10).
 aula(nh301, 50, 10).
