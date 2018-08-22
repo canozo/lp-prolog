@@ -1,3 +1,4 @@
+% prolog
 estudiante(2000100001,1,[math101, phys201, ec201]) .
 estudiante(2000100002,1,[math101, phys201, hist301]).
 estudiante(2000100003,1,[math101, ec201, hist301]) .
@@ -200,4 +201,17 @@ fechaexam(hist301, ['19.04.2017', '26.05.2017', '06.06.2017']).
 fechaexam(hist301, ['20.04.2017', '27.05.2017', '07.06.2017']).
 
 % Inicio de programa
+% lista_estudiantes(id_curso, lista_e).
+% Toma el id del curso y agrega a lista_e los estudiantes que toman el curso
+lista_estudiantes(Id, Lista) :-
+		append([], [estudiante(Id, _, _)], Lista).
 
+% lista_fechas(id_estudiante, lista_fechas).
+% Toma el id del estudiante y agrega a lista_fechas las fechas de los examenes de los cursos que está tomando
+lista_fechas(Id, Lista) :-
+		append([], [estudiante(Id, _, _)], Lista).
+
+% aulas_adecuadas(id_curso, lista_aulas).
+% Toma el id del curso y agrega a lista_aulas, el código del aula que tiene la cantidad suficiente de escritorios para izquierdos para ese curso
+aulas_adecuadas(Id, Lista) :-
+		append([], [estudiante(Id, _, _)], Lista).
