@@ -1,4 +1,3 @@
-% Base de estudiantes
 estudiante(2000100001,1,[math101, phys201, ec201]) .
 estudiante(2000100002,1,[math101, phys201, hist301]).
 estudiante(2000100003,1,[math101, ec201, hist301]) .
@@ -62,11 +61,9 @@ estudiante(2002173510,1,[]).
 estudiante(2000101958,0,[math101, phys201]) .
 estudiante(2000102139,1,[phys201, ec201]).
 estudiante(2000103215,0,[cmpe150, math101]).
-estudiante(2000114311,0,[cmpe150, hist301]).
-estudiante(2000115412,1,[math101, phys201]).
+estudiante(2000104311,0,[cmpe150, hist301]).
+estudiante(2000105412,1,[math101, phys201]).
 estudiante(2002196509,0,[math101, hist301]).
-
-% Base de aulas
 aula(nh101, 50, 10).
 aula(nh201, 50, 10).
 aula(nh301, 50, 10).
@@ -134,7 +131,6 @@ aula(dtf601, 30, 5).
 aula(dtf701, 40, 10).
 aula(dtf801, 50, 15).
 aula(dtf901, 20, 5).
-
 fechaexam(cmpe150, ['15.04.2018', '25.05.2018', '04.06.2018']).
 fechaexam(math101, ['17.04.2018', '15.05.2018', '04.06.2018']).
 fechaexam(phys201, ['15.04.2018', '19.05.2018', '05.06.2018']).
@@ -202,3 +198,6 @@ fechaexam(hist301, ['17.04.2017', '24.05.2017', '04.06.2017']).
 fechaexam(hist301, ['18.04.2017', '25.05.2017', '05.06.2017']).
 fechaexam(hist301, ['19.04.2017', '26.05.2017', '06.06.2017']).
 fechaexam(hist301, ['20.04.2017', '27.05.2017', '07.06.2017']).
+
+% Inicio de programa
+
