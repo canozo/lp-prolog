@@ -62,8 +62,8 @@ estudiante(2002173510,1,[]).
 estudiante(2000101958,0,[math101, phys201]) .
 estudiante(2000102139,1,[phys201, ec201]).
 estudiante(2000103215,0,[cmpe150, math101]).
-estudiante(2000104311,0,[cmpe150, hist301]).
-estudiante(2000105412,1,[math101, phys201]).
+estudiante(2000114311,0,[cmpe150, hist301]).
+estudiante(2000115412,1,[math101, phys201]).
 estudiante(2002196509,0,[math101, hist301]).
 
 % Base de aulas
