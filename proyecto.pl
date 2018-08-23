@@ -201,17 +201,33 @@ fechaexam(hist301, ['19.04.2017', '26.05.2017', '06.06.2017']).
 fechaexam(hist301, ['20.04.2017', '27.05.2017', '07.06.2017']).
 
 % Inicio de programa
+% Predicados para realizar ciertas operaciones
+
 % Obtener los cursos que tiene el estudiante
 obtener_cursos(Id, Lista) :-
 		estudiante(Id, _, Lista).
 
+% Hacer un merge de una lista de listas a una sola lista
+flatten([], []) :- !.
+flatten([L|Ls], FlatL) :-
+	!,
+	flatten(L, NewL),
+	flatten(Ls, NewLs),
+	append(NewL, NewLs, FlatL).
+flatten(L, [L]).
+
 % Obtener las fechas de examenes de un curso
 obtener_fechas(Id, Lista) :-
-		fechaexamen(Id, Lista).
+		bagof(ListaPred, fechaexam(Id, ListaPred), Matriz),
+		flatten(Matriz, Lista).
 
+% PROBLEMAS
 % lista_estudiantes(id_curso, lista_e).
 % Toma el id del curso y agrega a lista_e los estudiantes que toman el curso
 lista_estudiantes(Id, Lista) :-
+		% Buscar al estudiante
+		% si la clase es miembro
+		% agregar al estudiante
 		append([], [estudiante(Id, _, _)], Lista).
 
 % lista_fechas(id_estudiante, lista_fechas).
