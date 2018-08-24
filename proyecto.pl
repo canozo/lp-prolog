@@ -221,14 +221,23 @@ obtener_fechas(Id, Lista) :-
 		bagof(ListaPred, fechaexam(Id, ListaPred), Matriz),
 		flatten(Matriz, Lista).
 
+% Nos retorna el ID de todos los estudiantes matriculados a un ID de un curso
+estudiantes_matriculados(Id, IdResultado) :-
+		% Buscar al estudiante
+		estudiante(IdEstudiante, _, Cursos),
+		% si la clase es miembro de sus clases matriculadas
+		member(Id, Cursos),
+		% asignar el ID del estudiante
+		IdResultado is IdEstudiante.
+
 % PROBLEMAS
+
 % lista_estudiantes(id_curso, lista_e).
 % Toma el id del curso y agrega a lista_e los estudiantes que toman el curso
+% El mismo obtener_lista_estudiantes pero retorna todos los valores en una lista
 lista_estudiantes(Id, Lista) :-
-		% Buscar al estudiante
-		% si la clase es miembro
-		% agregar al estudiante
-		append([], [estudiante(Id, _, _)], Lista).
+		bagof(ListaPred, estudiantes_matriculados(Id, ListaPred), Matriz),
+		flatten(Matriz, Lista).
 
 % lista_fechas(id_estudiante, lista_fechas).
 % Toma el id del estudiante y agrega a lista_fechas las fechas de los examenes de los cursos que está tomando
