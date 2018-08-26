@@ -65,9 +65,9 @@ estudiante(2000103215,0,[cmpe150, math101]).
 estudiante(2000104311,0,[cmpe150, hist301]).
 estudiante(2000105412,1,[math101, phys201]).
 estudiante(2002196509,0,[math101, hist301]).
-aula(nh101, 50, 10).
-aula(nh201, 50, 10).
-aula(nh301, 50, 10).
+aula(math101, 50, 10).
+aula(math101, 50, 5).
+aula(math101, 50, 15).
 aula(m2001, 30, 5).
 aula(etaa2, 30, 5).
 aula(etaa3, 35, 5).
@@ -132,6 +132,7 @@ aula(dtf601, 30, 5).
 aula(dtf701, 40, 10).
 aula(dtf801, 50, 15).
 aula(dtf901, 20, 5).
+% 134
 fechaexam(cmpe150, ['16.05.2018', '26.06.2018', '04.07.2018']).
 fechaexam(cmpe150, ['17.06.2018', '26.07.2018', '04.08.2018']).
 fechaexam(cmpe150, ['01.07.2018', '26.08.2018', '24.09.2018']).
@@ -203,10 +204,6 @@ fechaexam(hist301, ['20.04.2017', '27.05.2017', '07.06.2017']).
 % Inicio de programa
 % Predicados para realizar ciertas operaciones
 
-% Obtener los cursos que tiene el estudiante
-obtener_cursos(Id, Lista) :-
-		estudiante(Id, _, Lista).
-
 % Hacer un merge de una lista de listas a una sola lista
 flatten([], []) :- !.
 flatten([L|Ls], FlatL) :-
@@ -223,12 +220,16 @@ obtener_fechas(Id, Lista) :-
 
 % Nos retorna el ID de todos los estudiantes matriculados a un ID de un curso
 estudiantes_matriculados(Id, IdResultado) :-
-		% Buscar al estudiante
 		estudiante(IdEstudiante, _, Cursos),
-		% si la clase es miembro de sus clases matriculadas
 		member(Id, Cursos),
-		% asignar el ID del estudiante
 		IdResultado is IdEstudiante.
+
+% Para cada curso, buscar las fechas y agregarlas a una lista
+para_cada_curso([], []).
+para_cada_curso([H | T], Lista) :-
+		obtener_fechas(H, Fechas),
+		para_cada_curso(T, FechasUnidas),
+		append(Fechas, FechasUnidas, Lista).
 
 % PROBLEMAS
 
@@ -242,10 +243,15 @@ lista_estudiantes(Id, Lista) :-
 % lista_fechas(id_estudiante, lista_fechas).
 % Toma el id del estudiante y agrega a lista_fechas las fechas de los examenes de los cursos que está tomando
 lista_fechas(Id, Lista) :-
-		append([], [estudiante(Id, _, _)], Lista).
+		estudiante(Id, _, Cursos),
+		para_cada_curso(Cursos, Lista).
 
 % aulas_adecuadas(id_curso, lista_aulas).
 % Toma el id del curso y agrega a lista_aulas, el código del aula que tiene la cantidad suficiente de escritorios para izquierdos para ese curso
-aulas_adecuadas(Id, Lista) :-
-		append([], [estudiante(Id, _, _)], Lista).
+aulas_adecuadas(IdCurso, Lista) :-
+		% Saber cuantos estudiantes zurdos hay en el curso
+		% Saber cuantos escritorios para zurdos en el curso
+		% if escritorios > estudiantes then
+		% Agregar el aula a la lista resultante
+		IdCurso is 0.
 
