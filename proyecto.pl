@@ -65,9 +65,9 @@ estudiante(2000103215,0,[cmpe150, math101]).
 estudiante(2000104311,0,[cmpe150, hist301]).
 estudiante(2000105412,1,[math101, phys201]).
 estudiante(2002196509,0,[math101, hist301]).
-aula(math101, 50, 10).
-aula(math101, 50, 5).
-aula(math101, 50, 15).
+aula(nh101, 50, 10).
+aula(nh201, 50, 5).
+aula(nh301, 50, 15).
 aula(m2001, 30, 5).
 aula(etaa2, 30, 5).
 aula(etaa3, 35, 5).
@@ -132,7 +132,6 @@ aula(dtf601, 30, 5).
 aula(dtf701, 40, 10).
 aula(dtf801, 50, 15).
 aula(dtf901, 20, 5).
-% 134
 fechaexam(cmpe150, ['16.05.2018', '26.06.2018', '04.07.2018']).
 fechaexam(cmpe150, ['17.06.2018', '26.07.2018', '04.08.2018']).
 fechaexam(cmpe150, ['01.07.2018', '26.08.2018', '24.09.2018']).
@@ -250,8 +249,8 @@ lista_fechas(Id, Lista) :-
 % Toma el id del curso y agrega a lista_aulas, el código del aula que tiene la cantidad suficiente de escritorios para izquierdos para ese curso
 aulas_adecuadas(IdCurso, Lista) :-
 		% Saber cuantos estudiantes zurdos hay en el curso
-		% Saber cuantos escritorios para zurdos en el curso
-		% if escritorios > estudiantes then
+		% Para cada aula:
+		% if escritorios para zurdos en el aula >= estudiantes then
 		% Agregar el aula a la lista resultante
 		IdCurso is 0.
 
