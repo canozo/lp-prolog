@@ -211,12 +211,12 @@ flatten([L|Ls], FlatL) :-
 	flatten(Ls, NewLs),
 	append(NewL, NewLs, FlatL).
 flatten(L, [L]).
+
 % obtiene la longitud de las listas
 my_length([], 0).
-
-my_length([_|Xs], L):-
-          my_length(Xs, L2),
-          L is L2 + 1.
+my_length([_ | Xs], L) :-
+		my_length(Xs, L2),
+		L is L2 + 1.
 
 % Obtener las fechas de examenes de un curso
 obtener_fechas(Id, Lista) :-
@@ -225,15 +225,18 @@ obtener_fechas(Id, Lista) :-
 
 % Nos retorna el ID de todos los estudiantes matriculados a un ID de un curso
 estudiantes_matriculados(Id, IdResultado) :-
-		estudiante(IdEstudiante, _, Cursos),
-		member(Id, Cursos),
-		IdResultado is IdEstudiante.
+		estudiante(IdResultado, _, Cursos),
+		member(Id, Cursos).
 
-% nos retorna los estudiantes matriculados que son zurdos
+% Nos retorna los estudiantes matriculados que son zurdos
 estudiantes_matriculados_zurdos(Id, IdResultado) :-
-		estudiante(IdEstudiante,0, Cursos),
-		member(Id, Cursos),
-		IdResultado is IdEstudiante.
+		estudiante(IdResultado, 0, Cursos),
+		member(Id, Cursos).
+
+% Lista todos los estudiantes zurdos de un curso
+lista_estudiantes_zurdos(Id, Lista) :-
+		bagof(ListaPred, estudiantes_matriculados_zurdos(Id, ListaPred), Matriz),
+		flatten(Matriz, Lista).
 
 % Para cada curso, buscar las fechas y agregarlas a una lista
 para_cada_curso([], []).
@@ -242,18 +245,15 @@ para_cada_curso([H | T], Lista) :-
 		para_cada_curso(T, FechasUnidas),
 		append(Fechas, FechasUnidas, Lista).
 
-%devuelve el id del aula que tiene la capacidad de asientos para zurdos
-aulas_correctas(n,IdResultado) :-
-		aula(id_aula,capacidad,numz),
-		numz>=n,
-		IdResultado is id_aula.
+% Devuelve el id del aula que tiene la capacidad de asientos para zurdos
+aulas_correctas(N, IdResultado) :-
+		aula(IdResultado, _, NumZurdos),
+		NumZurdos >= N.
 
-
-% lista todos los estudiantes zurdos de un curso
-lista_estudiantes_zurdos(Id,Lista) :-
-	bagof(ListaPred, estudiantes_matriculados_zurdos(Id, ListaPred), Matriz),
+% El mismo predicado anterior pero devuelve los valores en una lista
+lista_aulas_correctas(N, Lista) :-
+		bagof(ListaPred, aulas_correctas(N, ListaPred), Matriz),
 		flatten(Matriz, Lista).
-
 
 % PROBLEMAS
 
@@ -273,8 +273,7 @@ lista_fechas(Id, Lista) :-
 % aulas_adecuadas(id_curso, lista_aulas).
 % Toma el id del curso y agrega a lista_aulas, el código del aula que tiene la cantidad suficiente de escritorios para izquierdos para ese curso
 aulas_adecuadas(Id, Lista) :-
-	bagof(ListaPred, aulas_correctas(my_length(lista_estudiantes_zurdos(Id,lista),L), ListaPred), Matriz),
-	flatten(Matriz, Lista).
-	
-		 
+		lista_estudiantes_zurdos(Id, ListaZurdos),
+		length(ListaZurdos, CantidadZurdos),
+		lista_aulas_correctas(CantidadZurdos, Lista).
 
